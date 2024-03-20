@@ -1,20 +1,21 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend {
     public class Startup {
         public IConfiguration Configuration { get; }
 
         public Startup() {
-            Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true).Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-            string connectionString = Configuration.GetConnectionString("ConnectionString");
+            string conn = Configuration["Connection"];
+            var serverVersion = ServerVersion.AutoDetect(conn);
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(conn, serverVersion));
             services.AddSpaStaticFiles(configuration:options => { options.RootPath = "wwwroot"; });
             services.AddControllers();
             services.AddCors(options => {
