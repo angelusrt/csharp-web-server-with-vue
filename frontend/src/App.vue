@@ -10,8 +10,11 @@
 
 <style>
 * {
-  background-color: #1f2d40;
   margin: 0;
+}
+
+html {
+  background-color: #1f2d40;
 }
 
 #app {
@@ -26,7 +29,7 @@ nav {
   padding: 30px 30px;
   background-color: #2c3e50;
   border-radius: 20px;
-  margin: 10px auto 20px auto;
+  margin: 10px auto 40px auto;
   max-width: 200px;
 }
 
@@ -47,5 +50,14 @@ nav a.router-link-exact-active {
   color: #2c3e50;
   border-color: #42b983;
   background-color: #42b983;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 40px;
+}
+h3 {
+  margin-bottom: 80px;
+  font-weight: normal;
 }
 </style>
