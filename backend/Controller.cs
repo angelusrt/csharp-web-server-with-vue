@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers {
     [Route("api/vote")]
@@ -13,28 +12,38 @@ namespace backend.Controllers {
 
         [HttpGet]
         public async Task<IActionResult> GetVote() {
-            var voteCounts = await dbContext.votes
-                .GroupBy(v => v.vote)
-                .Select(g => new { vote = g.Key, count = g.Count() })
-                .ToListAsync();
+            try {
+                var voteCounts = Enum.GetValues(typeof(VoteEnum))
+                    .Cast<VoteEnum>()
+                    .Select(g => dbContext.votes.Count(v => (int)v.vote == (int)g))
+                    .ToArray();
 
-            return Ok(voteCounts);
+                return Ok(voteCounts);
+            } catch (System.Exception err) {
+                Console.WriteLine(err);
+                return BadRequest("There was something wrong with the database");
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> PostVote(PostVoteRequest request) {
-            if (!ModelState.IsValid) {
-                return BadRequest(ModelState);
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+
+            try {
+                var pseudonym = new Pseudonym { pseudonym = request.pseudonym };
+                dbContext.pseudonyms.Add(pseudonym);
+                await dbContext.SaveChangesAsync();
+
+                var vote = new Vote { vote = (int)request.pokemon, pseudonym_id = pseudonym.id };
+                dbContext.votes.Add(vote);
+                await dbContext.SaveChangesAsync();
+                return Ok("Your vote was computed");
+                
+            } catch (System.Exception err) {
+                Console.WriteLine(err);
+                return BadRequest("There was a problem either with your request or with the database");
             }
-
-            var pseudonym = new Pseudonym { pseudonym = request.pseudonym };
-            var vote = new Vote { vote = request.pokemon, pseudonym_id = pseudonym.id };
-
-            dbContext.pseudonyms.Add(pseudonym);
-            dbContext.votes.Add(vote);
-            await dbContext.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(PostVote), vote);
         }
     }
 }
