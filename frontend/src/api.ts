@@ -10,6 +10,6 @@ export default {
     async execute(method: Method, resource: string, data?: Data) {
         return client({ method, url: resource, data, }).then(req => req.data )
     },
-    get(): Promise<[number, number, number][]|null> { return this.execute('get', '/') },
+    get(): Promise<[number, number, number]|null> { return this.execute('get', '/') },
     post(data: Data) { return this.execute('post', '/', data) },
 }

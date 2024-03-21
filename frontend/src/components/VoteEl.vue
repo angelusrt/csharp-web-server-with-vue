@@ -17,10 +17,13 @@
       async post() {
         const data: Data = {pokemon: 0, pseudonym: ''}
 
-        if (this.name === "charmander") { data.pokemon = 1 }
-        else if (this.name === "bulbasaur") { data.pokemon = 2 }
+        if (this.name === "squirtle") { data.pokemon = 1 }
+        else if (this.name === "charmander") { data.pokemon = 2 }
+        else { data.pokemon = 3 }
+
         data.pseudonym = this.pseudonym
 
+        console.log(data)
         await this.postVote(data)
       }
     }
@@ -36,7 +39,7 @@
     padding: 40px;
     margin: 20px;
     background-color: transparent;
-    border: 2px solid #1f2d40;
+    border: 2px solid #2c3e50;
     border-radius: 10px;
   }
 

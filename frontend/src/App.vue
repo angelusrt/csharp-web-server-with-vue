@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
+      <div class="nav-left">
+        <h2>Pokemon Favorito</h2>
+      </div>
+      <div class="nav-right">
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+      </div>
     </nav>
     <router-view />
   </div>
@@ -15,6 +20,8 @@
 
 html {
   background-color: #1f2d40;
+  width: 80%;
+  margin: auto;
 }
 
 #app {
@@ -26,12 +33,14 @@ html {
 }
 
 nav {
-  padding: 30px 30px;
-  background-color: #2c3e50;
-  border-radius: 20px;
-  margin: 10px auto 40px auto;
-  max-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0;
+  margin-bottom: 80px;
+  /*border: 2px solid #2c3e50;*/
 }
+
 
 nav a {
   font-weight: normal;
@@ -42,13 +51,11 @@ nav a {
   margin: 0 5px;
   font-style: normal;
   text-decoration: none;
-  border: solid 2px #1f2d40;
 }
 
 nav a.router-link-exact-active {
   font-weight: bold;
   color: #2c3e50;
-  border-color: #42b983;
   background-color: #42b983;
 }
 

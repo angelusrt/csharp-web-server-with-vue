@@ -1,7 +1,7 @@
 <template>
   <div v-if="show" :class="[type, 'alert']">
-    <button @click="dismiss">&times;</button>
     <p>{{ message }}</p>
+    <button @click="dismiss">&times;</button>
   </div>
 </template>
 
@@ -26,24 +26,22 @@ export default {
 
 <style scoped>
   .alert {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
+    text-align: center;
     top: 20px;
     right: 20px;
+    left: 20px;
+    max-width: 200px;
+    margin: 0 auto;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     color: #fff;
   }
 
-  .info {
-    background-color: #3498db;
-  }
-
   .success {
-    background-color: #2ecc71;
-  }
-
-  .warning {
-    background-color: #f39c12;
+    background-color: #42b983;
   }
 
   .error {
@@ -56,9 +54,9 @@ export default {
     color: inherit;
     cursor: pointer;
     padding: 0;
+    padding-left: 10px;
     font: inherit;
     outline: inherit;
-    position: absolute;
     top: 5px;
     right: 10px;
   }
