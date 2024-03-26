@@ -1,6 +1,6 @@
 namespace backend {
   public enum VoteEnum : int {
-      squirle = 1, charmander = 2, bulbasaur = 3 
+      squirtle = 1, charmander = 2, bulbasaur = 3 
   }
 
   public class Pseudonym {
