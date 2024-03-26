@@ -6,6 +6,7 @@ Properties/
 
 /backend/*.json
 /backend/*.csproj
+/frontend-alt/.angular/
 
 frontend/node_modules
 

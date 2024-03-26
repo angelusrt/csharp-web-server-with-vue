@@ -1,0 +1,15 @@
+<div class="home">
+  <alert 
+    [style.display]="alertShow?'inherit':'none'" 
+    [class]="[alertType,'alert']" 
+    [message]="alertMessage" 
+    [dismiss]="dismissAlert.bind(this)"/>
+  <label>Digite um pseudônimo</label>
+  <input rows="1" (change)="setPseudonym($event)"/>
+  <div class="vote-list">
+    <vote-el class="vote-el" [votes]="votes[0]" [pseudonym]="pseudonym" name="squirtle" [postVote]="postVote.bind(this)"/>
+    <vote-el class="vote-el" [votes]="votes[1]" [pseudonym]="pseudonym" name="charmander" [postVote]="postVote.bind(this)"/>
+    <vote-el class="vote-el" [votes]="votes[2]" [pseudonym]="pseudonym" name="bulbasaur" [postVote]="postVote.bind(this)"/>
+  </div>
+  <h3>{{total}} votos computados</h3>
+</div>
